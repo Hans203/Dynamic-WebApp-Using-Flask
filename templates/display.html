@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+	  <link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+
+    <title>Cloud9-ShowCars</title>
+</head>
+<body>
+  <header>
+    <a href="/homepage"><img src="/static/images/logo1.png" alt="logo" id="logocars"></a>
+    <div class="searchbar">
+        <form action="/search" method="post" class="headsearch">
+            <img src="/static/images/search.png" alt="searchlogo" height="25px" width="25px">
+            <input type="text" placeholder="Search Cars..." id="search" onkeyup="Filter()">
+        </form>
+        <div class="dropdown">
+            {% for car in searchitem %}
+                <a href="/display/{{car[1]}}" class="searchitems">{{car[0]}}</a>
+            {% endfor %}
+            <div id="noResults" style="display: none;">No Results Found</div>
+        </div>
+    </div>
+    <div class="headtwo">
+      <button type="menu"class="headbtn"><a href="/car" style="color: white;">New Cars</a></button>
+      <button type="menu" class="headbtn"><a href="/gallery" style="color: white;">Gallery</a></button>
+      <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+      {% if session['loggedin']%}
+      <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+      <div class="account">
+          <span><b>User: {{session['username']}}</b></span> 
+          <a href="/garage">Your Garage</a>
+          <a href="/payment">Your Orders</a>
+          <span onclick="logout()">Log out</span>
+      </div>
+      
+      {% else %}
+      <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+      {% endif %}
+  </div>
+</header>
+<div class="header-duplicate"></div>
+    <main>
+        <button class="carousel-arrow carousel-arrow--prev" onclick="handleCarouselMove(false)">
+          &#8249;
+        </button>
+      
+        <button class="carousel-arrow carousel-arrow--next" onclick="handleCarouselMove()">
+          &#8250;
+        </button>
+        
+        <div class="carousel-container" dir="ltr">
+          <div class="carousel-slide"><img src="{{car[11]}}" alt="" width="100%" height="auto"></div>
+          <div class="carousel-slide"><img src="{{car[12]}}" alt="" width="100%" height="auto"></div>
+          <div class="carousel-slide"><img src="{{car[13]}}" alt="" width="100%" height="auto"></div>
+        </div>
+        <div class="container-item">
+          <h1>{{car[1]}} {{car[2]}}</h1>
+          <span>Previous Owners: {{car[16]}}</span>
+          <span>Body Type: {{car[10]}}</span>
+          <span>Year: {{car[3]}}</span>
+          <span>Horsepower: {{car[6]}}</span>
+          <span>Ex-Showroom Price At</span>
+          <h3 id="price">{{car[9]}}</h3>
+          <div class="buttons">
+            <button onclick=garage() id="buttgara">Add to Garage</button>
+            <a href="/buy/{{car[2]}}"><button id="butbuy">Proceed to Buy</button></a>
+          </div>
+          
+      </div>
+    </main>
+    <div class="specification">
+      <div class="key-features">
+        <p><img src="/static/images/car-engine.png" alt="car-engine">{{car[5]}}</p>
+        <p><img src="/static/images/engine_type.png" alt="engine_type">{{car[4]}}</p>
+        <p><img src="/static/images/torque-wrench.png" alt="torque">{{car[7]}}</p>
+        <p><img src="/static/images/speedometer.png" alt="speedometer">{{car[8]}}</p>
+        <p><img src="/static/images/odometer.png" alt="odometer">{{car[14]}}</p>
+        <p><img src="/static/images/door.png" alt="door">{{car[15]}}</p>
+        <p><img src="/static/images/manual-transmission.png" alt="tranmission">{{car[17]}}</p>
+        <p><img src="/static/images/wheel.png" alt="wheel">{{car[19]}}</p>
+      </div>
+
+      <div class="about-car">
+        <h1>{{car[1]}} {{car[2]}} Key Specifications</h1>
+        <p>{{car[18]}}</p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+          <div class="footer-row">
+              <div class="footer-col">
+                  <h4>About Us</h4>
+                  <p>We provide the best luxury cars to buy. Explore our vast range of high-performance vehicles that match your style.</p>
+              </div>
+              <div class="footer-col">
+                  <h4>Quick Links</h4>
+                  <ul>
+                      <li><a href="/homepage">Home</a></li>
+                      <li><a href="/car">Cars</a></li>
+                      <li><a href="/gallery">Gallery</a></li>
+                      <li><a href="/aboutus">About Us</a></li>
+                  </ul>
+              </div>
+              <div class="footer-col">
+                  <h4>Follow Us</h4>
+                  <ul class="socials">
+                      <li><a href="https://www.instagram.com/_h.ans_/profilecard/?igsh=b3czZWQ0MWZmc2Nr"><img src="/static/images/icon-logo-instagram.png" alt=""></a></li>
+                      <li><a href="https://www.linkedin.com/in/mohit-manoj"><img src="/static/images/icon-logo-linkedin.png" alt=""></a></li>
+                      <li><a href="https://x.com/AJArenaYT?s=09"><img src="/static/images/icon-logo-twitter.png" alt=""></a></li>
+                      <li><a href="https://youtube.com/@ajarenayt?si=yCSHaYZEQGYW7aSg"><img src="/static/images/icon-logo-youtube.png" alt=""></a></li>
+                  </ul>
+              </div>
+              <div class="footer-col">
+                  <h4>Contact Us</h4>
+                  <ul>
+                      <li>www.cloud9.com</li>
+                      <li>+91 80753 27132</li>
+                      <li>KE Hall, Christ University</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+      <div class="footer-bottom">
+          <p>&copy; 2024 Hypercars Website. All rights reserved.</p>
+      </div>
+  </footer>      
+
+  
+  <script>
+    const priceElement = document.querySelector('#price');
+    const formattedPrice = Number(priceElement.textContent).toLocaleString('en-US');
+    priceElement.textContent = "$"+formattedPrice;
+
+    const carousel = document.querySelector(".carousel-container");
+    const slide = document.querySelector(".carousel-slide");
+    
+    function handleCarouselMove(positive = true) {
+    const slideWidth = slide.clientWidth;
+    carousel.scrollLeft = positive ? carousel.scrollLeft + slideWidth : carousel.scrollLeft - slideWidth;
+    }
+    function garage(){
+      fetch('/garage', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',},
+        body:JSON.stringify({ value: "{{car[0]}}" })
+      })
+      .then(response => response.json())
+      .then(data => {
+        b = data[0]
+        alert(b['message'])
+        let x = document.querySelector('#buttgara')
+        a = data[1]
+        console.log(data[1])
+        x.innerHTML = a['buttValue']
+      })
+  }
+  window.addEventListener('load', addto())
+    function addto(){
+      console.log(3)
+      fetch('/addtogarage', {
+        method:"POST",
+        headers: {'Content-Type': 'application/json',},
+        body:JSON.stringify({ value: "{{car[0]}}" })
+      })
+      .then(response=> response.json())
+      .then(data=>{
+        let x = document.querySelector('#buttgara')
+        console.log(data['message']+x)
+        x.innerHTML = data['message']
+      })
+    }
+
+    function Filter() {
+    let input = document.getElementById('search').value
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName('searchitems');
+    let drop = document.querySelector(".dropdown")
+    let count = 0; 
+    let noResults = document.querySelector('#noResults');
+    console.log(drop.classList)
+
+    for (i = 0; i < x.length; i++) {
+    if (!x[i].innerHTML.toLowerCase().includes(input)|| count>=5) {
+        x[i].style.display = "none";
+        console.log(x[i])
+    }
+    else {
+        x[i].style.display = "block";
+        drop.classList.add("show");
+        count++;
+    }
+    }
+    if (count === 0) {
+    noResults.style.display = 'block';
+    drop.classList.add('show');
+    } else {
+    noResults.style.display = 'none';
+    }
+    }
+    window.onclick = function(event) {
+    if (!event.target.matches('#search')) {
+    var openDropdown = document.querySelector(".dropdown");
+    console.log(openDropdown)
+    if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+    }}}
+    function accnt(){
+        let x = document.querySelector(".account")
+        x.classList.toggle('showed')
+    }
+    function logout(){
+        fetch('/logout')
+        .then(response => response.json())
+        .then(data => {
+            alert(data)
+            window.location.href = '/';
+            
+        })
+        .catch(error => console.log(error))
+    }
+    </script>
+</body>
+</html>

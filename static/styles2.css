@@ -1,0 +1,484 @@
+*{
+    box-sizing: border-box;
+}
+a{
+    all: unset;
+}
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    
+}
+button{
+  all: unset;
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+}
+
+header{
+  position:fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  align-items: center;
+  z-index: 10;
+}
+#logocars{
+  width: 150px ;
+  height: 75px;
+  margin-top: 1rem;
+  margin-left: 60px;
+}
+
+
+
+.searchbar{
+  flex: 1;
+	position: relative;
+	display: inline-block;
+	width: 40%;
+  margin-left: 10rem;
+  z-index: 20;
+	}
+.headsearch{
+  display: flex;
+  background-color: white;
+  width: 30rem;
+  align-items: center;
+  
+}
+.headsearch img{
+  filter: grayscale(100%) brightness(150%);
+  background-color: white;
+  margin-left: 20px;
+}
+#search{
+	width: 25rem;
+	height: 50px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  text-indent: 10px;
+}
+#search:focus{
+  outline: none;
+}
+.dropdown {
+	display: none;
+	position: absolute;
+	background-color: white;
+	width: 30rem;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 10;
+
+}
+.searchitems{
+	text-transform: capitalize;
+	color: black;
+  padding: 12px 16px;
+	text-decoration: none;  	
+  display: block;
+  text-indent: 30px;
+}
+.searchitems:hover, .searchitems:focus {
+	background-color: #2980B9;
+}
+#searchsubmit{
+  background-color: #FF0800;
+  color: white;
+  width: 10rem;
+  height: 50px;
+  border: 1px solid black;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#searchsubmit:hover{
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+  background-color: #FA8072;
+}
+.headtwo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-right: 100px;
+}
+
+.headbtn{
+  color: white;
+  position: relative;
+  padding: 0;
+  height: 30px;
+  width: 100px;
+  text-align: center;
+}
+.headbtn::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transition: transform 0.25s ease-out;
+}
+.headbtn:hover::after {
+  transform: scaleX(1);
+}
+.headbtn::after {
+  transform-origin: bottom center;
+}
+
+.headbtn:hover::after {
+  transform-origin: bottom center;
+}
+
+.account{
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  z-index: 3;
+  border: 1px solid red;
+  border-radius: 10px;
+  top: 70%;
+  right: 4.1%;
+  width: 180px;
+  height: 200px;
+  background-color: white;
+  align-items: center;
+  text-align: center;
+
+}
+.account span{
+  flex:1;
+  padding-top: 15px;
+  width: 100%;
+}
+.account a{
+  flex: 1;
+  padding-top: 15px;
+  width: 100%;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  color: black;
+}
+.account span:nth-of-type(2):hover{
+  cursor: pointer;
+  background-color: lightcoral;
+  color: black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.account a:hover{
+  background-color: lightcoral;
+}
+.header-duplicate{
+  width: 100%;
+  height: 100px;
+}
+
+
+
+
+main{
+  display: flex;
+  justify-content: space-between;
+  background-color: #f6f6f6;
+  height: 100%;
+}
+
+.container-cars{
+  margin-top: 34px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  width: 74%;
+  margin-left: 30px;
+  
+}
+.container-cars h2{
+  margin: 0;
+  width: 100%;
+  font-family: "League Gothic", sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 65px;
+  font-size: 2.5rem;
+}
+.container-cars a{
+  width: 20rem;
+  height: 23.8rem;
+}
+.container-cars a:hover{
+  cursor: pointer;
+}
+.items-car{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Agdasima" sans-serif;
+  font-weight: normal;
+}
+
+.container-filter h2{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-style: normal;
+  margin-left: 10px;
+}
+.container-filter{
+  position: fixed;
+  top: 140px;
+  left: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 26%;
+  overflow: scroll;
+  height: 550px;
+  z-index: 1;
+}
+.container-filter::-webkit-scrollbar {
+  display: none; 
+}
+.selected{
+  border: 2px solid red;
+}
+
+
+.image-checkbox {
+    display: none;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 200px;
+    overflow-y: scroll;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px 0px;
+    background-color: white;
+    transition: 1s ease-in;
+    padding: 5px;
+}
+.image-checkbox label:hover{
+  border-color: red; 
+  box-shadow: 0 0 5px  black;
+}
+
+.image-checkbox input[type="checkbox"] {
+    display: none; 
+}
+  
+.image-checkbox label {
+  cursor: pointer;
+  display: inline-block;
+  border: 2px solid transparent;
+  width: 120px;
+  height: 90px;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  margin-top: 10px;
+  padding-left: 23px;
+  padding-top: 17px;
+}
+  
+  
+.image-checkbox input[type="checkbox"]:checked + label {
+  border-color: red; 
+  box-shadow: 0 0 5px red;
+}
+.image-checkbox::-webkit-scrollbar {
+  width: 4px; 
+  height: 4px; 
+}
+
+.image-checkbox::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.image-checkbox::-webkit-scrollbar-thumb {
+  background-color: red; 
+  border-radius: 2px; 
+}
+
+.image-checkbox::-webkit-scrollbar-thumb:hover {
+  background-color: darkred; 
+}
+
+.image-checkbox::-webkit-scrollbar-button {
+  display: none; 
+}
+#enginewid{
+  cursor: pointer;
+  display: inline-block;
+  border: 2px solid transparent;
+  width: 90px;
+  height: 60px;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  margin-top: 10px;
+  padding-left: 23px;
+  padding-top: 17px;
+}
+.active{
+    display: flex;
+}
+
+.filt{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  min-height: 60px;
+  background-color: white ;
+  border-bottom: 2px solid #d3d3d3;
+  text-transform: uppercase;
+  font-size: 23px;
+  font-family: "Agdasima", sans-serif;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.show{
+  display:block
+}
+.showed{
+  display: flex;
+}
+#resetBtn{
+  cursor: pointer;
+  color: red;
+}
+#resetBtn:hover{
+  color: #2980B9;
+}
+footer {
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 40px 0;
+  margin-top: 100px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  width: 22%;
+  margin-bottom: 30px;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.footer-col h4::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #ff5f5f;
+}
+
+.footer-col p {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.8;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #ddd;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+  color: #ff5f5f;
+  transition: 0.3s;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+.social-icons a:hover {
+  color: #ff5f5f;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #444;
+  font-size: 14px;
+}
+
+.footer-bottom p {
+  margin-bottom: 0;
+  color: #aaa;
+}
+.socials {
+  list-style-type: none;
+  padding: 0;
+}
+.socials li {
+  display: inline-block;
+  margin-left: 10px;
+}
+.socials img {
+  width: 32px;
+}
+.socials img:hover {
+  opacity: 0.5;
+}
+
+
+
+
+
+  

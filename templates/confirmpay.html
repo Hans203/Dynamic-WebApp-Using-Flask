@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles5.css">
+    <link rel="stylesheet" href="/static/styles5.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>Cloud9-Your Cars</title>
+    <script src="/static/script3.js" defer></script>
+    <style>
+        main{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        h1{
+            font-family: "Agdasima";
+            text-transform: uppercase;
+            font-size: 50px;
+        }
+        .item-cars{
+            display: flex;
+            justify-content: start;
+            width: 80%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid black;
+            overflow: hidden;
+            gap: 30px;
+        }
+        .item-cars h1{
+            margin: 0;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        .item-container{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 20px   ;
+        }
+        .item-container span{
+            font-size: 24px;
+        }
+        .alert{
+            width: 30%;
+            height: 20px;
+            padding: 20px;
+            text-align: center;
+            border:1px solid black;
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            font-size: 20px;
+            /* background-color: #28a745; */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/homepage"><img src="/static/images/logo1.png" alt="logo" id="logocars"></a>
+        <div class="searchbar">
+            <form action="/search" method="post" class="headsearch">
+                <img src="/static/images/search.png" alt="searchlogo" height="25px" width="25px">
+                <input type="text" placeholder="Search Cars..." id="search" onkeyup="Filter()">
+            </form>
+            <div class="dropdown">
+                {% for car in searchitem %}
+                    <a href="/display/{{car[1]}}" class="searchitems">{{car[0]}}</a>
+                {% endfor %}
+                <div id="noResults" style="display: none;">No Results Found</div>
+            </div>
+        </div>
+        <div class="headtwo">
+          <button type="menu"class="headbtn"><a href="/car" style="color: white;">New Cars</a></button>
+          <button type="menu" class="headbtn"><a href="/gallery" style="color: white;">Gallery</a></button>
+          <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+          {% if session['loggedin']%}
+          <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+          <div class="account">
+              <span><b>User: {{session['username']}}</b></span> 
+              <a href="/garage">Your Garage</a>
+              <span onclick="logout()">Log out</span>
+          </div>
+          
+          {% else %}
+          <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+          {% endif %}
+      </div>
+    </header>
+    
+    <div class="header-duplicate"></div>
+    <center><h1>Your <span style="color: red;">Bookings</span></h1></center>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{category}}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% for item in car%}
+        <div class="item-cars">
+            <img src="{{item[2]}}" alt="carimage" width="30%" height="auto">
+            <div class="item-container">
+                <h1>{{item[0]}} <span style="color: red;">{{item[1]}}</span></h1>
+                <span><b>Total Paid:</b> <span class="price">{{item[5]}}</span></span>
+                <span><b>Payment mode: </b>{{item[11]}}</span>
+                <span><b>Delivering to Address:</b> {{item[6]}} {{item[7]}} {{item[8]}} {{item[9]}} {{item[10]}}.</span>
+            </div>
+            <div>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+
+</body>
+</html>

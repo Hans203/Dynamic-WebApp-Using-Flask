@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>Cloud9-Join Us</title>
+    <style>
+        body{
+            flex-direction: row-reverse;
+        }
+        .side-info{
+            margin-left: 0;
+            margin-right: 50px;
+        }
+        .login{
+            margin-top: 30px;
+            height: 600px;
+            margin-right: 0;
+            margin-left: 150px;
+        }
+        .login h1{
+            margin-top: 30px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="side-info">
+        <h1>Join the Fast Lane of Hyper Cars</h1>
+        <p>Ready to accelerate your passion for hyper cars? Sign up now and unlock access to the world of unrivaled performance and speed.</p>
+        <a href="/homepage" id="home">Homepage</a>
+    </div>
+    <div class="login">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="post">
+            <label>Name</label>
+            <input type="text" name="name" required placeholder="Full Name">
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="sample@gmail.com">
+            <label>Username</label>
+            <input type="text" name="username" required placeholder="Username">
+            <label>Password</label>
+            <div class="passwordiv">
+                <input type="password" name="password" class="password" pattern=".{8,}" placeholder="Minimum 8 characters" required>
+                <img src="/static/images/eye.png" alt="chumma" height="20px" width="20px" onclick="validate()" class="pass">
+            </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{category}}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <input type="submit" value="Sign Up">
+        </form>
+        
+        <a href="/login">Go to login</a>
+    </div>
+    <script>
+        function validate(){
+            var x = document.querySelector(".password")
+            var y = document.querySelector(".pass")
+            if (x.type=="password"){
+                x.type = "text"
+                y.src = "/static/images/eyeslash.png"
+            }else{
+                x.type="password"
+                y.src="/static/images/eye.png"
+            }	
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>CLOUD9-Login</title>
+</head>
+<body>
+    
+    <div class="side-info">
+        <h1>Welcome Back, Ready to Drive into Hyper Cars?</h1>
+        <p>Explore the world of hypercars, where cutting-edge technology meets unparalleled speed and luxury. Discover the most powerful and exclusive vehicles that redefine performance and prestige  </p>
+        <a href="/homepage" id="home">Homepage</a>
+    </div>
+    <div class="login">
+        <h1>Login In</h1>
+        <form action="/login" method="post">
+            <label>Username</label>
+            <input type="text" name="username" required placeholder="Username">
+            <label>Password</button></label>	
+            <div class="passwordiv">
+                <input type="password" name="password" class="password"required placeholder="Password">
+                <img src="/static/images/eye.png" alt="chumma"" height="20px" width="20px" onclick="validate()" class="pass">
+            </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{category}}">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <input type="submit" value="Log In">
+        </form>
+
+        <a href="/signup">Not on Cloud9 yet? Sign-up</a>
+    </div>
+    
+    <script>
+        function validate(){
+            var x = document.querySelector(".password")
+            var y = document.querySelector(".pass")
+            if (x.type=="password"){
+                x.type = "text"
+                y.src = "/static/images/eyeslash.png"
+            }else{
+                x.type="password"
+                y.src="/static/images/eye.png"
+            }
+        }
+    </script>
+</body>
+</html>

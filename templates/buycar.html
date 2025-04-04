@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles5.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>Cloud9-Buy Exotics</title>
+    <script src="/static/script3.js" defer></script>
+
+</head>
+<body>
+    <header>
+        <a href="/homepage"><img src="/static/images/logo1.png" alt="logo" id="logocars"></a>
+        <div class="searchbar">
+            <form action="/search" method="post" class="headsearch">
+                <img src="/static/images/search.png" alt="searchlogo" height="25px" width="25px">
+                <input type="text" placeholder="Search Cars..." id="search" onkeyup="Filter()">
+            </form>
+            <div class="dropdown">
+                {% for car in searchitem %}
+                    <a href="/display/{{car[1]}}" class="searchitems">{{car[0]}}</a>
+                {% endfor %}
+                <div id="noResults" style="display: none;">No Results Found</div>
+            </div>
+        </div>
+        <div class="headtwo">
+          <button type="menu"class="headbtn"><a href="/car" style="color: white;">New Cars</a></button>
+          <button type="menu" class="headbtn"><a href="/gallery" style="color: white;">Gallery</a></button>
+          <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+          {% if session['loggedin']%}
+          <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+          <div class="account">
+              <span><b>User: {{session['username']}}</b></span> 
+              <a href="/garage">Your Garage</a>
+              <a href="/payment">Your Orders</a>
+              <span onclick="logout()">Log out</span>
+          </div>
+          
+          {% else %}
+          <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+          {% endif %}
+      </div>
+    </header>
+    
+    <div class="header-duplicate"></div>
+    {% block body %}
+    <main>
+        <div class="checkout-container">
+            <h2>Checkout & Drive Faster</h2>
+            <p>We will help you get ready today</p>
+            <div class="checkout-box">
+                <div class="order-summary">
+                    <h3>Review Order</h3>
+                    <ul>
+                        <li>Car chosen <span>{{car[1]}} {{car[2]}}</span></li>
+                        <li>Recipient Name <span>{{user_info[1]}}</span></li>
+                        <li>Processing Time <span>6 days</span></li>
+                        
+                        <li>Price <span class="price">{{car[9]}}</span></li>
+                        <li>VAT (tax) <span class="price">{{vat}}</span></li>
+                        <li style="font-weight: bold;">Grand total<span class="price">{{tp}}</span></li>
+                    </ul>
+                    <a href="#container-item"><button class="continue-btn" onclick="pay()">Proceed to Pay</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="container-item" id="container-item">
+            <h1>{{car[1]}} {{car[2]}}</h1>
+            <img src="{{car[11]}}" alt="" width="100%" height="auto">
+        </div>
+    </main>
+    
+    <div class="container" id="payment-details">
+        <h2>Payment Details</h2>
+        <form class="delivery-address" action="/payment" method="post" >
+            <h3>Shipping Address</h3>
+            <input type="hidden" name="carid" value="{{car[0]}}">
+            <input type="hidden" name="tp" value="{{tp}}">
+            <label>Street Address</label>
+            <textarea name="street" rows="3" cols="10"></textarea>
+            <label>City</label>
+            <input type="text" name="city">
+            <label>State</label>
+            <input type="text" name="state">
+            <label>Postal Code</label>
+            <input type="text" name="postal">
+            <label>Country</label>
+            <select id="country" name="country" required>
+              <option value="">Select your country</option>
+              <option value="USA">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="UK">United Kingdom</option>
+              <option value="India">India</option>
+            </select>
+
+            <div class="card">
+              <h3>Payment Mode</h3>
+              <label><input type="radio" name="payment" value="Debit Card/Credit Card" onclick="paymode('debit')">Debit/Credit Card</label>
+              <label><input type="radio" name="payment" value="Cash On Delivery" onclick="paymode('cash')">Cash on Delivery</label>
+            </div>
+    
+            <div class="debitinfo">
+              <label>Cardholder Name</label>
+              <input type="text" id="cardholder-name" name="cardholderName" placeholder="Name">
+              <label>Card Number</label>
+              <input type="text" id="card-number" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
+              <div class="row">
+                  <div>
+                      <label>Expiry Date</label>
+                      <input type="month" id="expiry-date" name="expiryDate">
+                  </div>
+                  <div>
+                      <label>CVV</label>
+                      <input type="password" id="cvv" name="cvv" maxlength="3" placeholder="XXX">
+                  </div>
+              </div>
+              
+              <input type="submit" value="Pay Now"id="paysubmit">
+            </div>
+            <div class="CashOn">
+              <h2>Cash On Delivery</h2>
+              <span>Bring the entire cash in a Suitcase.</span>
+              <input type="submit" value="Book Now" id="cashsubmit">
+            </div>
+        </form>
+
+
+        
+      </div>    
+      
+    </div>
+{% endblock %}
+<footer class="footer">
+  <div class="footer-container">
+      <div class="footer-row">
+          <div class="footer-col">
+              <h4>About Us</h4>
+              <p>We provide the best luxury cars to buy. Explore our vast range of high-performance vehicles that match your style.</p>
+          </div>
+          <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul>
+                  <li><a href="/homepage">Home</a></li>
+                  <li><a href="/car">Cars</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
+                  <li><a href="/aboutus">About Us</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <h4>Follow Us</h4>
+              <ul class="socials">
+                  <li><a href="https://www.instagram.com/_h.ans_/profilecard/?igsh=b3czZWQ0MWZmc2Nr"><img src="/static/images/icon-logo-instagram.png" alt=""></a></li>
+                  <li><a href="https://www.linkedin.com/in/mohit-manoj"><img src="/static/images/icon-logo-linkedin.png" alt=""></a></li>
+                  <li><a href="https://x.com/AJArenaYT?s=09"><img src="/static/images/icon-logo-twitter.png" alt=""></a></li>
+                  <li><a href="https://youtube.com/@ajarenayt?si=yCSHaYZEQGYW7aSg"><img src="/static/images/icon-logo-youtube.png" alt=""></a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+              <h4>Contact Us</h4>
+              <ul>
+                  <li>www.cloud9.com</li>
+                  <li>+91 80753 27132</li>
+                  <li>KE Hall, Christ University</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <div class="footer-bottom">
+      <p>&copy; 2024 Hypercars Website. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

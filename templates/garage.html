@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>Cloud9-Garage</title>
+    <style>
+        main{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        h1{
+            text-transform: uppercase;
+            font-family: "Agdasima", sans-serif;
+            font-size: 50px;
+            margin-left: 50px;
+        }
+        .items-car img{
+            width: 250px;
+            height: auto;
+
+        }
+        .heading{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+        .heading button{
+            position: relative;
+            background-color: white;
+            margin-left: 26%;
+            margin-right:2%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            height: 50px;
+            width: 200px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .remove-options{
+            display: none;
+            flex-direction: column ;
+            justify-content: center;
+            align-items: center;
+            width: 202px;
+            background-color: white;
+            position: absolute;
+            top: 27.2%;
+            right: 2%;
+            z-index: 6;
+            border: 1px solid black;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            max-height: 300px;
+            box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+
+
+        }
+        .remove-options span{
+            flex:1;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 100%;
+            border-bottom: 1px solid black;
+            
+            text-align: center;
+            cursor: pointer;
+        }
+        .remove-options span:last-of-type{
+            border-bottom: none;
+        }
+        .remove-options span:hover{
+        cursor: pointer;
+        background-color: red;
+        color: white;
+        }
+        .account a:hover{
+        background-color: lightcoral;
+        }
+        .header-duplicate{
+        width: 100%;
+        height: 100px;
+        }
+        .showed{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/homepage"><img src="/static/images/logo1.png" alt="logo" id="logocars"></a>
+        <div class="headtwo">
+            <button type="menu"class="headbtn"><a href="/car" style="color: white;">New Cars</a></button>
+            <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+            {% if session['loggedin']%}
+            <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+            <div class="account">
+                <span>{{session['username']}}</span> 
+                <a href="/garage">Your Garage</a>
+                <a href="/payment">Your Orders</a>
+                <span onclick="logout()">Log out</span>
+            </div>
+            
+            {% else %}
+            <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+            {% endif %}
+        </div>
+    </header>
+    <div class="header-duplicate"></div>
+    <div class="heading">
+        <h1>Your <span style="color: red;">Garage</span></h1>
+        <button type="button" onclick="removeCars()"><span>Remove from Garage</span> <img src="/static/images/dropdown.png" alt="" height="25px" width="25px"></button>
+        <div class="remove-options">
+            {% for car in cars%}
+            <span onclick="rmCars('{{car[0]}}')">{{car[1]}} {{car[2]}}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <main>
+        <div class="container-cars">
+        {% if cars %}
+            {% for car in cars %}
+            <a href="/display/{{car[2]}}">
+                <div class="items-car">
+                    <img src="{{car[11]}}" alt="Car" width="100%" height="auto">
+                    <h3>{{car[1]}} {{car[2]}}</h3>
+                    <span>Year: {{car[3]}}</span>
+                    <span>Engine Type: {{car[5]}} | Horsepower: {{car[6]}}</span>
+                    <h3 class="price">{{car[9]}}</h3>
+                </div>
+                
+            </a>
+            {% endfor %}
+        {% else %}
+        <p>No Cars in your garage.</p>
+        {% endif %}
+        </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>We provide the best luxury cars to buy. Explore our vast range of high-performance vehicles that match your style.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/homepage">Home</a></li>
+                        <li><a href="/car">Cars</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul class="socials">
+                        <li><a href="https://www.instagram.com/_h.ans_/profilecard/?igsh=b3czZWQ0MWZmc2Nr"><img src="/static/images/icon-logo-instagram.png" alt=""></a></li>
+                        <li><a href="https://www.linkedin.com/in/mohit-manoj"><img src="/static/images/icon-logo-linkedin.png" alt=""></a></li>
+                        <li><a href="https://x.com/AJArenaYT?s=09"><img src="/static/images/icon-logo-twitter.png" alt=""></a></li>
+                        <li><a href="https://youtube.com/@ajarenayt?si=yCSHaYZEQGYW7aSg"><img src="/static/images/icon-logo-youtube.png" alt=""></a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>www.cloud9.com</li>
+                        <li>+91 80753 27132</li>
+                        <li>KE Hall, Christ University</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hypercars Website. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+
+<script>
+    function rmCars(value){
+        fetch('/remove-car', {
+            method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ car_id : value })
+        })
+    .then(response => response.json())
+    .then(data => {
+            console.log(data)
+            alert(data['message'])
+            window.location.href = '/garage';
+        })
+    }
+    function removeCars(){
+        const x = document.querySelector(".remove-options")
+        x.classList.toggle('showed')
+        const y = document.querySelector(".heading button")
+        let comp = getComputedStyle(y)
+        let bottomLeft = comp.borderBottomRightRadius
+        let bottomRight = comp.borderBottomLeftRadius
+        console.log(bottomLeft)
+        if( bottomLeft==='10px' && bottomRight==='10px'){
+            y.style.borderBottomLeftRadius = '0px'
+            y.style.borderBottomRightRadius = '0px'
+        }else{
+            y.style.borderBottomLeftRadius = '10px'
+            y.style.borderBottomRightRadius = '10px'
+        }
+        let c = document.querySelector('.heading img')
+        if(c.src === "http://127.0.0.1:5000/static/images/dropdown.png"){
+            c.src = "http://127.0.0.1:5000/static/images/dropup.png"
+        }else{
+            c.src = "http://127.0.0.1:5000/static/images/dropdown.png"
+        }
+    }
+
+    const priceElement = document.querySelectorAll('.price');
+    priceElement.forEach((item)=>{
+    const formattedPrice = Number(item.textContent).toLocaleString('en-US');
+    item.textContent = "Price: $"+formattedPrice;
+    })
+
+    function accnt(){
+    let x = document.querySelector(".account")
+    x.classList.toggle('showed')
+    }
+    function logout(){
+        fetch('/logout')
+        .then(response => response.json())
+        .then(data => {
+            alert(data)
+            window.location.href = '/';
+            
+        })
+        .catch(error => console.log(error))
+    }
+    </script>
+</body>
+</html>

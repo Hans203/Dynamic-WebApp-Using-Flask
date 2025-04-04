@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&family=Titan+One&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>About Us - Cloud9</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+        header::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 500px;
+            background: url(/static/images/regera2.jpg) no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.9;
+            filter: brightness(30%) saturate(5) contrast(2);
+            z-index: -1; 
+    }
+        header{
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+
+            width: 100%;
+            height: 500px;
+            margin: 0;
+
+            margin-bottom: 30px;
+            border: 1px solid #F5E6CC;
+        }
+        header h1{
+            color: #cc0000;
+            font-size: 5rem;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin: 0;
+            font-family: "Titan One", sans-serif;
+        }
+        header p{
+            color: white;
+            font-size: 1.4rem;
+            font-family: "Agdasima" sans-serif;
+            margin-bottom: 70px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+        }
+        .content-section {
+            margin: 30px 0;
+            padding: 40px;
+        }
+        .content-section h3 {
+            font-size: 2.5rem;
+            font-family: "Agdasima" sans-serif;
+            color: #cc0000;
+            border-bottom: 2px solid #F5E6CC;
+            text-align: center;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            margin-bottom: 55px;
+        }
+        .content-section p {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .content-section ul {
+            list-style-type: square;
+            padding-left: 20px;
+            text-align: center; 
+        }
+        .cast-container {
+        display: flex;
+        width: 100%;
+        height: 150px;
+    
+        }
+        .cast-member {
+            flex: 1 1 16.66%;
+            text-align: center;
+            
+        }
+        .cast-member img { 
+            object-fit: cover;
+            border-radius: 50%; 
+            height: 200px;
+            width: 200px;
+        }
+        
+        footer {
+            background-color: #2c2c2c;
+            color: #fff;
+            padding: 40px 0;
+            margin-top: 100px;
+        }
+
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-col {
+            width: 22%;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .footer-col h4::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #ff5f5f;
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ddd;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ff5f5f;
+            transition: 0.3s;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+
+        .social-icons a:hover {
+            color: #ff5f5f;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 0;
+            color: #aaa;
+        }
+        .socials {
+            list-style-type: none;
+            padding: 0;
+        }
+        .socials li {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .socials img {
+            width: 32px;
+        }
+        .socials img:hover {
+            opacity: 0.5;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Cloud9</h1>
+        <p>Where unparalleled luxury meets high-performance engineering. Experience automotive perfection.</p>
+    </header>
+    <main>
+        
+        <div class="content-section">
+            <h3><span style="color: black;">OUR </span><span style="color: #cc0000;">LEGACY</span></h3>
+            <p>For decades, Cloud9 has set the standard in automotive excellence. Each vehicle in our collection represents a masterpiece of innovation, elegance, and power, designed for those who demand nothing but the best.</p>
+        </div>
+        <div class="content-section">
+            <h3><span style="color: black;">WHY </span><span style="color: #cc0000;">Cloud9?</span></h3>
+            <ul>
+                <li>Unrivaled selection of luxury and rare automobiles.</li>
+                <li>White-glove service tailored to every client’s needs.</li>
+                <li>A passion for perfection in every detail, from design to delivery.</li>
+            </ul>
+        </div>
+        <div class="content-section">
+            <h3><span style="color: black;">OUR </span><span style="color: #cc0000;">VISION</span></h3>
+            <p>To redefine luxury and exclusivity in the automotive world, combining artistry with engineering to create a driving experience like no other.</p>
+        </div>
+        <div class="content-section">
+            <h3><span style="color: black;">OUR </span><span style="color: #cc0000;">TEAM</span></h3>
+            <div class="cast-container">
+                <div class="cast-member">
+                    <img src="/static/images/hans.jpeg" alt="Hans">
+                    <p>Hans Thomson</p>
+                    <p style="color: rgb(180, 178, 178);">Founder</p>
+                </div>
+                <div class="cast-member">
+                    <img src="/static/images/Akshay.jpeg" alt="Akshay">
+                    <p>Akshay Johny</p>
+                    <p style="color: rgb(180, 178, 178);">Founder</p>
+                </div>
+                <div class="cast-member">
+                    <img src="/static/images/mohit.jpeg" alt="mohit">
+                    <p>Mohit Manoj</p>
+                    <p style="color: rgb(180, 178, 178);">Founder</p>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>We provide the best luxury cars to buy. Explore our vast range of high-performance vehicles that match your style.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/homepage">Home</a></li>
+                        <li><a href="/car">Cars</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul class="socials">
+                        <li><a href="https://www.instagram.com/_h.ans_/profilecard/?igsh=b3czZWQ0MWZmc2Nr"><img src="/static/images/icon-logo-instagram.png" alt=""></a></li>
+                        <li><a href="https://www.linkedin.com/in/mohit-manoj"><img src="/static/images/icon-logo-linkedin.png" alt=""></a></li>
+                        <li><a href="https://x.com/AJArenaYT?s=09"><img src="/static/images/icon-logo-twitter.png" alt=""></a></li>
+                        <li><a href="https://youtube.com/@ajarenayt?si=yCSHaYZEQGYW7aSg"><img src="/static/images/icon-logo-youtube.png" alt=""></a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>www.cloud9.com</li>
+                        <li>+91 80753 27132</li>
+                        <li>KE Hall, Christ University</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hypercars Website. All rights reserved.</p>
+        </div>
+    </footer>
+    <audio id="page-audio" src="/static/images/lfa.mp3" autoplay>
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        window.onload = function() {
+            var audio = document.getElementById("page-audio");
+            audio.play();
+        }
+    </script>
+</body>
+</html>

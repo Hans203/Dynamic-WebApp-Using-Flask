@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>Buy Exotic Cars</title>
+    
+</head>
+<body>
+    <header>
+        <a href="/homepage"><img src="/static/images/logo1.png" alt="logo" id="logocars"></a>
+        <div class="searchbar">
+            <form action="/search" method="post" class="headsearch">
+                <img src="/static/images/search.png" alt="searchlogo" height="25px" width="25px">
+                <input type="text" placeholder="Search Cars..." id="search" onkeyup="Filter()">
+            </form>
+            <div class="dropdown">
+                {% for car in searchitem %}
+                    <a href="/display/{{car[1]}}" class="searchitems">{{car[0]}}</a>
+                {% endfor %}
+                <div id="noResults" style="display: none;">No Results Found</div>
+            </div>
+        </div>
+        <div class="headtwo">
+            <button type="menu"class="headbtn"><a href="/homepage" style="color: white;">Home</a></button>
+            <button type="menu" class="headbtn"><a href="/gallery" style="color: white;">Gallery</a></button>
+            <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+            {% if session['loggedin']%}
+            <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+            <div class="account">
+                <span><b>User: {{session['username']}}</b></span> 
+                <a href="/garage">Your Garage</a>
+                <a href="/payment">Your Orders</a>
+                <span onclick="logout()">Log out</span>
+            </div>
+            
+            {% else %}
+            <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+            {% endif %}
+        </div>
+    </header>
+    <div class="header-duplicate"></div>
+
+    <main>
+        
+        <div class="container-filter">
+            <span class="filt"><span><b>Filters</b></span><span id="resetBtn" onclick="resetButton()">Reset</span></span>
+            <span class="filt" onclick="show(1)"><span>Brand</span><img src="/static/images/dropdown.png" alt="drop" height="40px" width="40px"></span>
+            <div class="image-checkbox">
+                {% for makes in make %}
+                    <input type="checkbox" class="filter" name="brand" id="{{makes[0]}}" value="{{makes[0]}}">
+                    <label for="{{makes[0]}}" style="background: url({{makes[1]}}) no-repeat; background-size: auto 60%; background-position: center;">
+                      </label>
+                {% endfor %}
+            </div>
+            
+            <span class="filt" onclick="show(2)"><span>Body Type</span> <img src="/static/images/dropdown.png" alt="drop" height="40px" width="40px"></span>
+            <div class="image-checkbox">
+                {% for body in bodytype %}
+                <input type="checkbox" class="filter" name="bodytype" id="{{body[0]}}" value="{{body[0]}}">
+                <label for="{{body[0]}}" style="background: url({{body[1]}}) no-repeat; background-size: auto 35%; background-position: center;"></label>
+                {% endfor %}
+            </div>
+            
+            <span class="filt" onclick="show(3)"><span>Enigine Type </span><img src="/static/images/dropdown.png" alt="drop" height="40px" width="40px"></span>
+            <div class="image-checkbox">
+                {% for engine in engine_type %}
+                <input type="checkbox" class="filter" name="enginetype" id="{{engine[0]}}" value="{{engine[0]}}">
+                <label for="{{engine[0]}}" id="enginewid">
+                    <center><span style="margin-right: 30px;">{{engine[0]}}</span></center>
+                  </label>
+                {% endfor %}
+            </div>
+            <span class="filt" onclick="show(4)"><span>0-60(mph)</span><img src="/static/images/dropdown.png" alt="drop" height="40px" width="40px"></span>
+            <div class="image-checkbox others">
+                <input id="speed_input" name="speed" type="range" min="1.9" max="4.9" step="0.2" value="4.9" class="filter">
+                <p>Speed (in mph): <output id="speed_value"></output></p>
+            </div>
+            <span class="filt" onclick="show(5)"><span>Price(in US Dollars) </span><img src="/static/images/dropdown.png" alt="drop" height="40px" width="40px"></span>
+            <div class="image-checkbox others">
+                <div>
+                    <input id="min_input" name="min_val" type="range" min="100000" max="6000000" step="100000" value="100000" class="filter"/>
+                    <p>Min Price: $<output id="min_value"></output></p>
+                </div>
+                <div>
+                    <input id="max_input" name="max_val" type="range" min="100000" max="6000000" step="100000" value="6000000" class="filter"/>
+                    <p>Max Price: $<output id="max_value"></output></p>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="filter-duplicate"></div>
+        <div class="container-cars">
+            <h2>Our <span style="color: red;">Collection</span></h2>
+            {% for car in cars %}
+            <a href="/display/{{car[2]}}">
+                <div class="items-car">
+                    <img src="{{car[11]}}" alt="Car" width="100%" height="auto">
+                    <h3>{{car[1]}} {{car[2]}}</h3>
+                    <span>Year: {{car[3]}}</span>
+                    <span>Engine Type: {{car[5]}} | Horsepower: {{car[6]}}</span>
+                    <h3 class="price">{{car[9]}}</h3>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+    </main>
+    <script>
+        const brandabrd = "{{brand}}"
+        const bodyabrd = "{{body}}"
+    </script>
+    <script src="/static/script2.js"></script>
+</body>
+</html>

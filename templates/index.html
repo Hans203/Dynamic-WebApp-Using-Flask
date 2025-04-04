@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+    <title>Buy Exotic Cars</title>
+    
+</head>
+<body>
+    <header>
+        <img src="static/images/logo1.png" alt="logo" width="150px" height="75px">
+        <div class="headtwo">
+            <button type="menu"class="headbtn"><a href="/car" style="color: white;">New Cars</a></button>
+            <button type="menu" class="headbtn"><a href="/gallery" style="color: white;">Gallery</a></button>
+            <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+            {% if session['loggedin']%}
+            <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+            <div class="account">
+                <span><b>User: {{session['username']}}</b></span> 
+                <a href="/garage">Your Garage</a>
+                <a href="/payment">Your Orders</a>
+                <span onclick="logout()">Log out</span>
+            </div>
+            
+            {% else %}
+            <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+            {% endif %}
+        </div>
+    </header>
+
+
+    <div class="poster">
+        <div class="poster-item">
+            <p>Beyond Speed & Limits.</p>
+            <span>Welcome to the home of Hyper Cars.</span>
+            <a href="/car"><button>Browse Collection</button></a>
+        </div>
+    </div>
+    
+    <main>
+        <center><h2>Discover <span style="color:red">Hyper Cars</span></h2></center>
+        <div class="slider">
+            <button class="carousel-arrow carousel-arrow--prev" onclick="handleCarouselMove(false)">
+              &#8249;
+            </button>
+          
+            <button class="carousel-arrow carousel-arrow--next" onclick="handleCarouselMove()">
+              &#8250;
+            </button>
+            
+            <div class="carousel-container" dir="ltr">
+                {% for car in cars%}
+                <a href="/display/{{car[2]}}" class="carousel-slide">
+                    <img src="{{car[11]}}" alt="Car" width="100%" height="auto">
+                    <h3>{{car[1]}} {{car[2]}}</h3>
+                    <span style="color: rgb(111, 111, 111); margin-bottom: 10px;">Year: {{car[3]}}</span>
+                    <span style="color: rgb(111, 111, 111);">Engine Type: {{car[5]}} | Horsepower: {{car[6]}}</span>
+                    <h3 class="price">{{car[9]}}</h3>
+                </a>
+                {% endfor%}
+
+              </div>
+              
+            </div>
+        </div>
+
+        <div class="line"></div>
+        
+        <center><h2>Discover by <span style="color: red;">Brand</span></h2></center>
+        <div class="branditem">
+            {% for i in brand %}
+                <a href="/brand/{{i[0]}}" style="background: url({{i[1]}}) no-repeat; background-size: auto 60%; background-position: center;"></a>
+            {% endfor %}
+        </div>
+
+        <div class="line"></div>
+
+        <center><h2>Discover by <span style="color: red;">Style</span></h2></center>
+        <div class="bodyitem">
+            {% for i in body %}
+                <a href="/body/{{i[0]}}" style="background: url({{i[1]}}) no-repeat; background-size: auto 25%; background-position: center;"><span>{{i[0]}}</span></a>
+            {% endfor%}
+
+        </div>
+
+        <div class="line"></div>
+
+        <center><h2>Discover <span style="color:red">Luxury</span></h2></center>
+
+        <div class="slider">
+            <button class="carousel-arrow carousel-arrow--prev" onclick="handleCarouselMove(false)">
+              &#8249;
+            </button>
+          
+            <button class="carousel-arrow carousel-arrow--next" onclick="handleCarouselMove()">
+              &#8250;
+            </button>
+            
+            <div class="carousel-container" dir="ltr">
+                {% for car in luxury%}
+                <a href="/display/{{car[2]}}" class="carousel-slide">
+                    <img src="{{car[11]}}" alt="Car" width="100%" height="auto">
+                    <h3>{{car[1]}} {{car[2]}}</h3>
+                    <span style="color: rgb(111, 111, 111); margin-bottom: 10px;">Year: {{car[3]}}</span>
+                    <span style="color: rgb(111, 111, 111);">Engine Type: {{car[5]}} | Horsepower: {{car[6]}}</span>
+                    <h3 class="price">{{car[9]}}</h3>
+                </a>
+                {% endfor%}
+
+              </div>
+              
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <center><div class="lower-main">
+            <h2>Beyond <span style="color: red;">Speed & Limits.</span></h2>
+            <span style="color: gray; font-size: 1.2rem;">Welcome to the home of Hyper Cars.</span>
+            <div class="lower-container">
+                <div class="lower-item">
+                    <img src="/static/images/diamond.png" alt="diamond" style =  "filter: brightness(0) saturate(100%) invert(32%) sepia(100%) saturate(7000%) hue-rotate(330deg) brightness(85%) contrast(120%);">
+                    <div><p>21</p><p>Luxury Car Brands</p></div>
+                </div>
+                <div class="lower-item">
+                    <img src="/static/images/caricon.png" alt="diamond" style =  "filter: brightness(0) saturate(100%) invert(32%) sepia(100%) saturate(7000%) hue-rotate(330deg) brightness(85%) contrast(120%);">
+                    <div><p>99+</p><p>Exotic Cars</p></div>
+                    
+                </div>
+                <div class="lower-item">
+                    <img src="/static/images/diamond.png" alt="diamond" style =  "filter: brightness(0) saturate(100%) invert(32%) sepia(100%) saturate(7000%) hue-rotate(330deg) brightness(85%) contrast(120%);">
+                    <div><p>1000+</p><p>Happy Customers</p></div>
+                </div>
+            </div>
+            <a href="/car"><button>Explore More &nbsp;&rarr;</button></a>
+        </div></center>
+        
+        
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>We provide the best luxury cars to buy. Explore our vast range of high-performance vehicles that match your style.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/homepage">Home</a></li>
+                        <li><a href="/car">Cars</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul class="socials">
+                        <li><a href="https://www.instagram.com/_h.ans_/profilecard/?igsh=b3czZWQ0MWZmc2Nr"><img src="/static/images/icon-logo-instagram.png" alt=""></a></li>
+                        <li><a href="https://www.linkedin.com/in/mohit-manoj"><img src="/static/images/icon-logo-linkedin.png" alt=""></a></li>
+                        <li><a href="https://x.com/AJArenaYT?s=09"><img src="/static/images/icon-logo-twitter.png" alt=""></a></li>
+                        <li><a href="https://youtube.com/@ajarenayt?si=yCSHaYZEQGYW7aSg"><img src="/static/images/icon-logo-youtube.png" alt=""></a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>www.cloud9.com</li>
+                        <li>+91 80753 27132</li>
+                        <li>KE Hall, Christ University</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hypercars Website. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+    const priceElement = document.querySelectorAll('.price');
+    priceElement.forEach((item)=>{
+        const formattedPrice = Number(item.textContent).toLocaleString('en-US');
+        item.textContent = "Price: $"+formattedPrice;
+    })
+    const formattedPrice = Number(priceElement.textContent).toLocaleString('en-US');
+    priceElement.textContent = "$"+formattedPrice;
+
+    const carousel = document.querySelector(".carousel-container");
+    const slide = document.querySelector(".carousel-slide");
+    
+    function handleCarouselMove(positive = true) {
+    const slideWidth = slide.clientWidth;
+    console.log(slideWidth)
+    console.log(carousel.scrollLeft)
+    carousel.scrollLeft = positive ? carousel.scrollLeft + slideWidth : carousel.scrollLeft - slideWidth;
+    }
+
+    function accnt(){
+        let x = document.querySelector(".account")
+        x.classList.toggle('show')
+    }
+    function logout(){
+        fetch('/logout')
+        .then(response => response.json())
+        .then(data => {
+            alert(data)
+            window.location.href = '/';
+            
+        })
+        .catch(error => console.log(error))
+    }
+    </script>
+</body>
+</html>

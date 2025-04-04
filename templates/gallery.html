@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles2.css">
+	<link rel="icon" type="image/x-icon" href="/static/images/logo.png">
+
+    <title>Gallery</title>
+    <style>
+        main{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        h1{
+            text-transform: uppercase;
+            font-family: "Agdasima", sans-serif;
+            font-size: 50px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/homepage"><img src="/static/images/logo1.png" alt="logo" id="logocars"></a>
+        <div class="headtwo">
+            <button type="menu"class="headbtn"><a href="/car" style="color: white;">New Cars</a></button>
+            <button type="menu" class="headbtn"><a href="/aboutus" style="color: white;">About Us</a></button>
+            {% if session['loggedin']%}
+            <button type="menu" class="headbtn accnt" onclick="accnt()">Accounts</button>
+            <div class="account">
+                <span>{{session['username']}}</span> 
+                <a href="/garage">Your Garage</a>
+                <a href="/payment">Your Orders</a>
+                <span onclick="logout()">Log out</span>
+            </div>
+            
+            {% else %}
+            <button type="menu" class="headbtn joinus"><a href="/login" style="color: white;">Join Us</a></button>
+            {% endif %}
+        </div>
+    </header>
+    <div class="header-duplicate"></div>
+    <h1>ga<span style="color: red;">llery</span></h1>
+    <main>
+        {% for image in images %}
+        <img src="{{image[0]}}" alt="" height="100px" width="150px">
+        <img src="{{image[1]}}" alt="" height="100px" width="150px">
+        <img src="{{image[2]}}" alt="" height="100px" width="150px">
+        {% endfor %}
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>We provide the best luxury cars to buy. Explore our vast range of high-performance vehicles that match your style.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/homepage">Home</a></li>
+                        <li><a href="/car">Cars</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <ul class="socials">
+                        <li><a href="https://www.instagram.com/_h.ans_/profilecard/?igsh=b3czZWQ0MWZmc2Nr"><img src="/static/images/icon-logo-instagram.png" alt=""></a></li>
+                        <li><a href="https://www.linkedin.com/in/mohit-manoj"><img src="/static/images/icon-logo-linkedin.png" alt=""></a></li>
+                        <li><a href="https://x.com/AJArenaYT?s=09"><img src="/static/images/icon-logo-twitter.png" alt=""></a></li>
+                        <li><a href="https://youtube.com/@ajarenayt?si=yCSHaYZEQGYW7aSg"><img src="/static/images/icon-logo-youtube.png" alt=""></a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li>www.cloud9.com</li>
+                        <li>+91 80753 27132</li>
+                        <li>KE Hall, Christ University</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hypercars Website. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
